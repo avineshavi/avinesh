@@ -21,11 +21,11 @@ body{
     color: rosybrown;
 }
 .insta{
-    font-size: 5rem;
+    font-size: 5rem !important;
 }
 .card{
     text-align: center;  
-    background: rgb(136, 240, 240);
+    background: rgb(136, 240, 240) !important;
 }
 .card-title{
     font-weight: bold;
