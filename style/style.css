@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 body{
     background: rgb(240, 237, 237);
@@ -17,4 +18,15 @@ body{
 }
 .fs-3{
     font-size: 3rem !important;
+    color: rosybrown;
+}
+.insta{
+    font-size: 5rem;
+}
+.card{
+    text-align: center;  
+    background: rgb(136, 240, 240);
+}
+.card-title{
+    font-weight: bold;
 }
