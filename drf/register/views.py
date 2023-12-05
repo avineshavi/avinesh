@@ -20,21 +20,21 @@ class UserLoginView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
     
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exeception = True)
-        user = authenticate(
+        try:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception = True)
+            email = serializer.validated_data['email']
+            password = serializer.validated_data['password']
+            user = authenticate(request, username=email, password=password)
             
-            request,
-            email=serializer.validated_data['email'],
-            password=serializer.validated_data['password']
-        )
-        
-        if user:
-            token, created = Token.objects.get_or_create(user=user)
-            return Response({'token':token.key},status=status.HTTP_200_OK)
-        
-        else:
-            return Response({'details':'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+            if user:
+                token, created = Token.objects.get_or_create(user=user)
+                return Response({'token':token.key},status=status.HTTP_200_OK)
+            
+            else:
+                return Response({'details':'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        except Exception as err:
+            print(err)
             
 
 class ShortenedURLCreateView(generics.CreateAPIView):
